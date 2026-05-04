@@ -1,35 +1,85 @@
-# Toplumsal Sorun Bildirim Sistemi
+# Community Issue Reporting System
 
-Spring Boot, Spring Security, Spring Data JPA ve Thymeleaf ile hazirlanmis katmanli mimariye sahip web projesi.
+A layered Spring Boot web application for reporting and managing community issues. The project uses Thymeleaf for the UI, Spring Security for role-based access control, and Spring Data JPA for persistence.
 
-## Ozellikler
+## Features
 
-- USER ve ADMIN rolleri ile oturum yonetimi
-- Sorun bildirimlerinde BLOB olarak veritabaninda saklanan fotograf
-- Kullanici icin sorun ekleme, listeleme, guncelleme ve silme
-- Admin icin tum sorunlari listeleme, onaylama, reddetme ve silme
-- Onaylanan sorunlar icin kullanici puan sistemi
-- Baslik veya kategoriye gore dinamik arama
-- Form validation ve Thymeleaf hata mesajlari
-- Ranking sayfasi
+- Layered architecture with Controller, Service, Repository, DTO, and Entity packages
+- USER and ADMIN roles with Spring Security authentication
+- Issue creation with image upload
+- Images stored directly in the database as BLOB data instead of file paths
+- User dashboard for listing, searching, editing, and deleting personal reports
+- Admin panel for viewing all reports and updating their status as pending, approved, or rejected
+- Score system that awards points when an admin approves a report
+- Dynamic search by issue title or category
+- Thymeleaf form validation with user-friendly error messages
+- Ranking page for users with the highest scores
+- H2 in-memory database for quick local development
 
-## Demo Kullanicilar
+## Tech Stack
 
-- Admin: `admin` / `admin123`
-- Kullanici: `user` / `user123`
+- Java 8
+- Spring Boot 2.7.18
+- Spring Security
+- Spring Data JPA
+- Thymeleaf
+- Bootstrap 5
+- H2 Database
+- Maven
 
-## Calistirma
+## Demo Accounts
 
-Bu proje Java 8 uyumlu Spring Boot 2.7 uzerine kuruludur.
+| Role | Username | Password |
+| --- | --- | --- |
+| Admin | `admin` | `admin123` |
+| User | `user` | `user123` |
 
-Makinede Maven kuruluysa:
+## Project Structure
+
+```text
+src/main/java/com/proje
+|-- config
+|-- controller
+|-- dto
+|-- entity
+|-- repository
+`-- service
+```
+
+## Running the Application
+
+Make sure Maven is installed, then run:
 
 ```bash
 mvn spring-boot:run
 ```
 
-Uygulama acildiginda:
+Open the application in your browser:
 
-- Web arayuzu: `http://localhost:8080`
-- H2 konsolu: `http://localhost:8080/h2-console`
-- JDBC URL: `jdbc:h2:mem:toplumsaldb`
+```text
+http://localhost:8080
+```
+
+## Database
+
+The project uses an in-memory H2 database by default.
+
+H2 console:
+
+```text
+http://localhost:8080/h2-console
+```
+
+Connection settings:
+
+```text
+JDBC URL: jdbc:h2:mem:toplumsaldb
+Username: sa
+Password:
+```
+
+Tables are generated automatically from the JPA entities when the application starts.
+
+## Notes
+
+Sample users and sample issue reports are created automatically on startup. Uploaded and sample images are saved in the `imageData` BLOB field of the `Problem` entity.
