@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="tr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head('Ranking')"></head>
+<body class="d-flex flex-column min-vh-100">
+<div th:replace="fragments :: navbar"></div>
+
+<main class="container py-4 flex-grow-1">
+    <div class="page-title">
+        <div>
+            <p class="text-muted mb-1">Onaylanan bildirimlerden kazanılan puanlar</p>
+            <h1 class="h3 mb-0">Ranking</h1>
+        </div>
+    </div>
+
+    <div class="ranking-list mt-4">
+        <div class="ranking-row" th:each="user, iter : ${users}">
+            <span class="ranking-place" th:text="${iter.index + 1}">1</span>
+            <strong th:text="${user.username}">user</strong>
+            <span class="ms-auto fw-semibold" th:text="${user.score} + ' puan'">0 puan</span>
+        </div>
+    </div>
+</main>
+
+<div th:replace="fragments :: footer"></div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="tr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head('Giriş')"></head>
+<body class="auth-page">
+<main class="auth-shell">
+    <section class="auth-panel">
+        <div class="auth-brand mb-4">
+            <span class="brand-mark brand-mark-lg">SB</span>
+            <div>
+                <p class="text-primary fw-semibold mb-1">Toplumsal Sorun Bildirim Sistemi</p>
+                <h1 class="h3 mb-2">Giriş yap</h1>
+                <p class="text-muted mb-0">Mahallendeki sorunları bildir, süreci takip et.</p>
+            </div>
+        </div>
+
+        <div class="alert alert-danger" th:if="${param.error}">
+            Hatalı kullanıcı adı veya şifre.
+        </div>
+        <div class="alert alert-success" th:if="${param.logout}">
+            Oturum güvenli şekilde kapatıldı.
+        </div>
+
+        <form th:action="@{/login}" method="post" class="vstack gap-3">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+            <div>
+                <label class="form-label" for="username">Kullanıcı adı</label>
+                <input class="form-control" id="username" name="username" autocomplete="username" required autofocus>
+            </div>
+            <div>
+                <label class="form-label" for="password">Şifre</label>
+                <input class="form-control" id="password" name="password" type="password"
+                       autocomplete="current-password" required>
+            </div>
+            <button class="btn btn-primary w-100" type="submit">Giriş</button>
+        </form>
+    </section>
+</main>
+</body>
+</html>
