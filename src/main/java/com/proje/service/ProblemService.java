@@ -50,6 +50,12 @@ public class ProblemService {
         return problemRepository.findAllByOrderByCreatedAtDesc();
     }
 
+    @Transactional(readOnly = true)
+    public List<Problem> findAll(String keyword, ProblemStatus status) {
+        String safeKeyword = StringUtils.hasText(keyword) ? keyword.trim() : "";
+        return problemRepository.searchAllWithFilters(safeKeyword, status);
+    }
+
     public Problem create(ProblemForm form, User owner) throws IOException {
         Problem problem = new Problem();
         applyForm(problem, form);

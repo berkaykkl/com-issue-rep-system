@@ -218,6 +218,22 @@ a {
     font-size: 0.9rem;
 }
 
+.auth-switch {
+    margin-top: 20px;
+    color: var(--app-muted);
+    font-size: 0.94rem;
+    text-align: center;
+}
+
+.auth-switch a {
+    color: var(--app-primary);
+    font-weight: 750;
+}
+
+.auth-switch a:hover {
+    color: var(--app-primary-dark);
+}
+
 .page-title {
     display: flex;
     align-items: center;
@@ -283,6 +299,10 @@ a {
 .search-bar .form-control {
     min-width: 220px;
     flex: 1;
+}
+
+.search-bar .filter-select {
+    width: 190px;
 }
 
 .problem-grid {
@@ -443,7 +463,8 @@ a {
     }
 
     .search-bar .btn,
-    .search-bar .form-control {
+    .search-bar .form-control,
+    .search-bar .filter-select {
         width: 100%;
     }
 }

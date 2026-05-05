@@ -21,19 +21,30 @@ public class AdminController {
     }
 
     @GetMapping("/problems")
-    public String problems(@RequestParam(value = "q", required = false) String keyword, Model model) {
-        model.addAttribute("problems", problemService.findAll(keyword));
+    public String problems(@RequestParam(value = "q", required = false) String keyword,
+                           @RequestParam(value = "status", required = false) ProblemStatus status,
+                           Model model) {
+        model.addAttribute("problems", problemService.findAll(keyword, status));
         model.addAttribute("statuses", ProblemStatus.values());
         model.addAttribute("q", keyword);
+        model.addAttribute("selectedStatus", status);
         return "admin/problems";
     }
 
     @PostMapping("/problems/status")
     public String updateStatus(@RequestParam Long id,
                                @RequestParam ProblemStatus status,
+                               @RequestParam(value = "q", required = false) String keyword,
+                               @RequestParam(value = "filterStatus", required = false) ProblemStatus filterStatus,
                                RedirectAttributes redirectAttributes) {
         problemService.changeStatus(id, status);
         redirectAttributes.addFlashAttribute("success", "Bildirim durumu guncellendi.");
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            redirectAttributes.addAttribute("q", keyword.trim());
+        }
+        if (filterStatus != null) {
+            redirectAttributes.addAttribute("status", filterStatus);
+        }
         return "redirect:/admin/problems";
     }
 }

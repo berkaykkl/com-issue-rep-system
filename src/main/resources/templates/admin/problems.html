@@ -17,9 +17,18 @@
     <form th:action="@{/admin/problems}" method="get" class="search-bar my-4">
         <input class="form-control" type="search" name="q" th:value="${q}"
                placeholder="Başlık veya kategori ara">
+        <select class="form-select filter-select" name="status" aria-label="Durum filtresi">
+            <option value="">Tüm durumlar</option>
+            <option th:each="status : ${statuses}"
+                    th:value="${status}"
+                    th:text="${status.label}"
+                    th:selected="${selectedStatus == status}">
+                Durum
+            </option>
+        </select>
         <button class="btn btn-outline-primary" type="submit">Ara</button>
         <a class="btn btn-outline-secondary" th:href="@{/admin/problems}"
-           th:if="${q != null && !#strings.isEmpty(q)}">Temizle</a>
+           th:if="${(q != null && !#strings.isEmpty(q)) || selectedStatus != null}">Temizle</a>
     </form>
 
     <div class="table-responsive panel-table">
@@ -64,6 +73,9 @@
                         <form th:action="@{/admin/problems/status}" method="post" class="d-flex gap-2">
                             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
                             <input type="hidden" name="id" th:value="${problem.id}">
+                            <input type="hidden" name="q" th:value="${q}">
+                            <input type="hidden" name="filterStatus"
+                                   th:value="${selectedStatus != null ? selectedStatus : ''}">
                             <select class="form-select form-select-sm" name="status">
                                 <option th:each="status : ${statuses}"
                                         th:value="${status}"
