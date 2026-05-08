@@ -14,7 +14,7 @@ A layered Spring Boot web application for reporting and managing community issue
 - Dynamic search by issue title or category
 - Thymeleaf form validation with user-friendly error messages
 - Ranking page for users with the highest scores
-- H2 in-memory database for quick local development
+- H2 file-based database for persistent local development
 
 ## Tech Stack
 
@@ -62,7 +62,7 @@ http://localhost:8080
 
 ## Database
 
-The project uses an in-memory H2 database by default.
+The project uses a file-based H2 database by default, so local data remains available after restarting the application.
 
 H2 console:
 
@@ -73,12 +73,12 @@ http://localhost:8080/h2-console
 Connection settings:
 
 ```text
-JDBC URL: jdbc:h2:mem:toplumsaldb
+JDBC URL: jdbc:h2:file:./data/toplumsaldb
 Username: sa
 Password:
 ```
 
-Tables are generated automatically from the JPA entities when the application starts.
+Tables are generated automatically from the JPA entities when the application starts. Local database files are written under the `data/` directory and are ignored by Git.
 
 ## Notes
 
