@@ -7,13 +7,12 @@
 <main class="container py-4 flex-grow-1">
     <div class="page-title">
         <div>
-            <p class="text-muted mb-1">Fotoğraf veritabanında BLOB olarak saklanır.</p>
             <h1 class="h3 mb-0" th:text="${mode == 'create'} ? 'Yeni bildirim' : 'Bildirim düzenle'">Yeni bildirim</h1>
         </div>
         <a class="btn btn-outline-secondary" th:href="@{/problem}">Geri</a>
     </div>
 
-    <form class="form-panel mt-4"
+    <form class="form-panel form-panel-compact mt-4"
           th:action="${mode == 'create'} ? @{/problem/add} : @{/problem/{id}/edit(id=${problem.id})}"
           th:object="${problemForm}"
           method="post"
@@ -43,17 +42,24 @@
 
         <div class="mb-3">
             <label class="form-label" for="description">Açıklama</label>
-            <textarea class="form-control" id="description" rows="6" th:field="*{description}"
+            <textarea class="form-control" id="description" rows="4" th:field="*{description}"
                       th:classappend="${#fields.hasErrors('description')} ? ' is-invalid'"></textarea>
             <div class="invalid-feedback" th:errors="*{description}"></div>
         </div>
 
         <div class="mb-4">
             <label class="form-label" for="image">Fotoğraf</label>
+            <div class="current-image-preview mb-2"
+                 th:if="${mode == 'edit' && problem != null && problem.hasImage()}">
+                <img th:src="${problem.imageAsBase64}" alt="Mevcut bildirim fotoğrafı">
+                <div>
+                    <strong>Mevcut fotoğraf</strong>
+                    <span>Yeni dosya seçmezsen bu fotoğraf korunur.</span>
+                </div>
+            </div>
             <input class="form-control" id="image" type="file" th:field="*{image}" accept="image/*"
                    th:classappend="${#fields.hasErrors('image')} ? ' is-invalid'">
             <div class="invalid-feedback" th:errors="*{image}"></div>
-            <div class="form-text" th:if="${mode == 'edit'}">Yeni dosya seçmezsen mevcut fotoğraf korunur.</div>
         </div>
 
         <button class="btn btn-primary" type="submit" th:text="${mode == 'create'} ? 'Oluştur' : 'Güncelle'">
