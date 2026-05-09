@@ -34,31 +34,31 @@ public class DataInitializer {
 
             if (problemRepository.count() == 0) {
                 createProblem(problemRepository, demoUser,
-                        "Parkta kirik bank",
-                        "Mahalle parkindaki oturma banki kirilmis durumda. Cocuk oyun alaninin yaninda oldugu icin risk olusturuyor.",
-                        "Cevre",
+                        "Parkta Kırık Bank",
+                        "Mahalle parkındaki oturma bankı kırılmış durumda. Çocuk oyun alanının yanında olduğu için risk oluşturuyor.",
+                        "Çevre",
                         ProblemStatus.APPROVED,
                         "#2f80ed",
                         "#56ccf2",
                         "PARK");
 
                 createProblem(problemRepository, demoUser,
-                        "Ana yolda cukur",
-                        "Otobus duragi yakinindaki yol uzerinde buyuk bir cukur var. Araclar ani manevra yapmak zorunda kaliyor.",
-                        "Ulasim",
+                        "Ana Yolda Çukur",
+                        "Otobüs durağı yakınındaki yol üzerinde büyük bir çukur var. Araçlar ani manevra yapmak zorunda kalıyor.",
+                        "Ulaşım",
                         ProblemStatus.PENDING,
                         "#f2994a",
                         "#f2c94c",
                         "YOL");
 
                 createProblem(problemRepository, demoUser,
-                        "Tasmakta olan cop konteyneri",
-                        "Sokak basindaki cop konteyneri uzun suredir bosaltilmadi. Kotu koku ve hijyen sorunu olustu.",
+                        "Taşmakta Olan Çöp Konteyneri",
+                        "Sokak başındaki çöp konteyneri uzun süredir boşaltılmadı. Kötü koku ve hijyen sorunu oluştu.",
                         "Temizlik",
                         ProblemStatus.REJECTED,
                         "#27ae60",
                         "#6fcf97",
-                        "COP");
+                        "ÇÖP");
 
                 demoUser.setScore(10);
                 userRepository.save(demoUser);
@@ -121,7 +121,7 @@ public class DataInitializer {
         graphics.drawString(label, 80, 290);
 
         graphics.setFont(new Font("SansSerif", Font.PLAIN, 30));
-        graphics.drawString("Ornek bildirim gorseli", 84, 345);
+        graphics.drawString("Örnek Bildirim Görseli", 84, 345);
         graphics.dispose();
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();

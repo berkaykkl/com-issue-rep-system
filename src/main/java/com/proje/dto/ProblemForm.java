@@ -7,15 +7,15 @@ import javax.validation.constraints.Size;
 
 public class ProblemForm {
 
-    @NotBlank(message = "Baslik bos birakilamaz.")
-    @Size(max = 120, message = "Baslik en fazla 120 karakter olabilir.")
+    @NotBlank(message = "Başlık boş bırakılamaz.")
+    @Size(max = 120, message = "Başlık en fazla 120 karakter olabilir.")
     private String title;
 
-    @NotBlank(message = "Aciklama bos birakilamaz.")
-    @Size(min = 10, max = 2000, message = "Aciklama 10 ile 2000 karakter arasinda olmalidir.")
+    @NotBlank(message = "Açıklama boş bırakılamaz.")
+    @Size(min = 10, max = 2000, message = "Açıklama 10 ile 2000 karakter arasında olmalıdır.")
     private String description;
 
-    @NotBlank(message = "Kategori bos birakilamaz.")
+    @NotBlank(message = "Kategori boş bırakılamaz.")
     @Size(max = 80, message = "Kategori en fazla 80 karakter olabilir.")
     private String category;
 

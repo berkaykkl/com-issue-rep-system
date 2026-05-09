@@ -33,11 +33,11 @@ public class AuthController {
                            BindingResult bindingResult,
                            RedirectAttributes redirectAttributes) {
         if (StringUtils.hasText(form.getUsername()) && userService.usernameExists(form.getUsername().trim())) {
-            bindingResult.rejectValue("username", "username.exists", "Bu kullanici adi zaten kullaniliyor.");
+            bindingResult.rejectValue("username", "username.exists", "Bu kullanıcı adı zaten kullanılıyor.");
         }
 
         if (!form.passwordsMatch()) {
-            bindingResult.rejectValue("confirmPassword", "password.mismatch", "Sifreler eslesmiyor.");
+            bindingResult.rejectValue("confirmPassword", "password.mismatch", "Şifreler eşleşmiyor.");
         }
 
         if (bindingResult.hasErrors()) {
@@ -45,7 +45,7 @@ public class AuthController {
         }
 
         userService.registerUser(form);
-        redirectAttributes.addFlashAttribute("success", "Kayit basarili. Simdi giris yapabilirsin.");
+        redirectAttributes.addFlashAttribute("success", "Kayıt başarılı. Şimdi giriş yapabilirsin.");
         return "redirect:/login";
     }
 }

@@ -2,7 +2,7 @@ package com.proje.entity;
 
 public enum ProblemStatus {
     PENDING("Beklemede"),
-    APPROVED("Onaylandi"),
+    APPROVED("Onaylandı"),
     REJECTED("Reddedildi");
 
     private final String label;

@@ -9,9 +9,9 @@
 <main class="container py-4 flex-grow-1">
     <div class="page-title">
         <div>
-            <h1 class="h3 mb-0">Kontrol paneli</h1>
+            <h1 class="h3 mb-0">Kontrol Paneli</h1>
         </div>
-        <a class="btn btn-primary" th:href="@{/problem/add}">Yeni bildirim</a>
+        <a class="btn btn-primary" th:href="@{/problem/add}">Yeni Bildirim</a>
     </div>
 
     <div class="stats-grid my-4">
@@ -30,8 +30,8 @@
     </div>
 
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2 class="h5 mb-0">Son bildirimlerim</h2>
-        <a class="btn btn-outline-primary btn-sm" th:href="@{/problem}">Tümünü gör</a>
+        <h2 class="h5 mb-0">Son Bildirimlerim</h2>
+        <a class="btn btn-outline-primary btn-sm" th:href="@{/problem}">Tümünü Gör</a>
     </div>
 
     <div class="empty-state" th:if="${#lists.isEmpty(problems)}">

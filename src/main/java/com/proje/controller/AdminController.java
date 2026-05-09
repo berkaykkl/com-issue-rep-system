@@ -38,7 +38,7 @@ public class AdminController {
                                @RequestParam(value = "filterStatus", required = false) ProblemStatus filterStatus,
                                RedirectAttributes redirectAttributes) {
         problemService.changeStatus(id, status);
-        redirectAttributes.addFlashAttribute("success", "Bildirim durumu guncellendi.");
+        redirectAttributes.addFlashAttribute("success", "Bildirim durumu güncellendi.");
         if (keyword != null && !keyword.trim().isEmpty()) {
             redirectAttributes.addAttribute("q", keyword.trim());
         }

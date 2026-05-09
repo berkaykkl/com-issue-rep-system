@@ -8,7 +8,7 @@
             <span class="brand-mark brand-mark-lg">SB</span>
             <div>
                 <p class="text-primary fw-semibold mb-1">Toplumsal Sorun Bildirim Sistemi</p>
-                <h1 class="h3 mb-2">Giriş yap</h1>
+                <h1 class="h3 mb-2">Giriş Yap</h1>
             </div>
         </div>
 
@@ -25,7 +25,7 @@
         <form th:action="@{/login}" method="post" class="vstack gap-3">
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
             <div>
-                <label class="form-label" for="username">Kullanıcı adı</label>
+                <label class="form-label" for="username">Kullanıcı Adı</label>
                 <input class="form-control" id="username" name="username" autocomplete="username" required autofocus>
             </div>
             <div>
@@ -33,12 +33,12 @@
                 <input class="form-control" id="password" name="password" type="password"
                        autocomplete="current-password" required>
             </div>
-            <button class="btn btn-primary w-100" type="submit">Giriş</button>
+            <button class="btn btn-primary w-100" type="submit">Giriş Yap</button>
         </form>
 
         <div class="auth-switch">
             Hesabın yok mu?
-            <a th:href="@{/register}">Kayıt ol</a>
+            <a th:href="@{/register}">Kayıt Ol</a>
         </div>
     </section>
 </main>

@@ -24,7 +24,7 @@ public class UserService {
 
     public User findByUsername(String username) {
         return userRepository.findByUsername(username)
-                .orElseThrow(() -> new IllegalArgumentException("Kullanici bulunamadi: " + username));
+                .orElseThrow(() -> new IllegalArgumentException("Kullanıcı bulunamadı: " + username));
     }
 
     public List<User> ranking() {
@@ -41,7 +41,7 @@ public class UserService {
     @Transactional
     public User registerUser(RegistrationForm form) {
         if (usernameExists(form.getUsername())) {
-            throw new IllegalArgumentException("Bu kullanici adi zaten kullaniliyor.");
+            throw new IllegalArgumentException("Bu kullanıcı adı zaten kullanılıyor.");
         }
 
         User user = new User();

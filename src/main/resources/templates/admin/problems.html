@@ -7,7 +7,7 @@
 <main class="container py-4 flex-grow-1">
     <div class="page-title">
         <div>
-            <h1 class="h3 mb-0">Admin paneli</h1>
+            <h1 class="h3 mb-0">Admin Paneli</h1>
         </div>
     </div>
 
@@ -17,7 +17,7 @@
         <input class="form-control" type="search" name="q" th:value="${q}"
                placeholder="Başlık veya kategori ara">
         <select class="form-select filter-select" name="status" aria-label="Durum filtresi">
-            <option value="">Tüm durumlar</option>
+            <option value="">Tüm Durumlar</option>
             <option th:each="status : ${statuses}"
                     th:value="${status}"
                     th:text="${status.label}"
@@ -45,7 +45,7 @@
             </thead>
             <tbody>
             <tr th:if="${#lists.isEmpty(problems)}">
-                <td colspan="7" class="text-center text-muted py-4">Kayıt bulunamadı.</td>
+                <td colspan="7" class="text-center text-muted py-4">Kayıt Bulunamadı.</td>
             </tr>
             <tr th:each="problem : ${problems}">
                 <td>

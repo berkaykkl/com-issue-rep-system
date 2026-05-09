@@ -6,16 +6,16 @@ import javax.validation.constraints.Size;
 
 public class RegistrationForm {
 
-    @NotBlank(message = "Kullanici adi bos birakilamaz.")
-    @Size(min = 3, max = 30, message = "Kullanici adi 3 ile 30 karakter arasinda olmalidir.")
-    @Pattern(regexp = "^[a-zA-Z0-9._-]+$", message = "Kullanici adi sadece harf, rakam, nokta, tire ve alt cizgi icerebilir.")
+    @NotBlank(message = "Kullanıcı adı boş bırakılamaz.")
+    @Size(min = 3, max = 30, message = "Kullanıcı adı 3 ile 30 karakter arasında olmalıdır.")
+    @Pattern(regexp = "^[a-zA-Z0-9._-]+$", message = "Kullanıcı adı sadece harf, rakam, nokta, tire ve alt çizgi içerebilir.")
     private String username;
 
-    @NotBlank(message = "Sifre bos birakilamaz.")
-    @Size(min = 6, max = 60, message = "Sifre en az 6 karakter olmalidir.")
+    @NotBlank(message = "Şifre boş bırakılamaz.")
+    @Size(min = 6, max = 60, message = "Şifre en az 6 karakter olmalıdır.")
     private String password;
 
-    @NotBlank(message = "Sifre tekrari bos birakilamaz.")
+    @NotBlank(message = "Şifre tekrarı boş bırakılamaz.")
     private String confirmPassword;
 
     public String getUsername() {

@@ -67,7 +67,7 @@ public class ProblemController {
 
         User currentUser = userService.findByUsername(authentication.getName());
         problemService.create(form, currentUser);
-        redirectAttributes.addFlashAttribute("success", "Bildirim olusturuldu ve onay bekliyor.");
+        redirectAttributes.addFlashAttribute("success", "Bildirim oluşturuldu ve onay bekliyor.");
         return "redirect:/problem";
     }
 
@@ -102,7 +102,7 @@ public class ProblemController {
         }
 
         problemService.update(id, form);
-        redirectAttributes.addFlashAttribute("success", "Bildirim guncellendi.");
+        redirectAttributes.addFlashAttribute("success", "Bildirim güncellendi.");
         return currentUser.isAdmin() ? "redirect:/admin/problems" : "redirect:/problem";
     }
 
@@ -121,7 +121,7 @@ public class ProblemController {
 
     private void validateImage(MultipartFile image, BindingResult bindingResult, boolean required) {
         if (required && (image == null || image.isEmpty())) {
-            bindingResult.rejectValue("image", "image.required", "Fotograf yuklemek zorunludur.");
+            bindingResult.rejectValue("image", "image.required", "Fotoğraf yüklemek zorunludur.");
             return;
         }
 
@@ -135,7 +135,7 @@ public class ProblemController {
 
     private void requireOwnerOrAdmin(User currentUser, Problem problem) {
         if (!problemService.canManage(currentUser, problem)) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Bu bildirim icin yetkiniz yok.");
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Bu bildirim için yetkiniz yok.");
         }
     }
 }

@@ -8,7 +8,7 @@
             <span class="brand-mark brand-mark-lg">SB</span>
             <div>
                 <p class="text-primary fw-semibold mb-1">Toplumsal Sorun Bildirim Sistemi</p>
-                <h1 class="h3 mb-2">Kayıt ol</h1>
+                <h1 class="h3 mb-2">Kayıt Ol</h1>
             </div>
         </div>
 
@@ -16,7 +16,7 @@
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 
             <div>
-                <label class="form-label" for="username">Kullanıcı adı</label>
+                <label class="form-label" for="username">Kullanıcı Adı</label>
                 <input class="form-control" id="username" th:field="*{username}" autocomplete="username"
                        th:classappend="${#fields.hasErrors('username')} ? ' is-invalid'" autofocus>
                 <div class="invalid-feedback" th:errors="*{username}"></div>
@@ -31,19 +31,19 @@
             </div>
 
             <div>
-                <label class="form-label" for="confirmPassword">Şifre tekrar</label>
+                <label class="form-label" for="confirmPassword">Şifre Tekrar</label>
                 <input class="form-control" id="confirmPassword" type="password" th:field="*{confirmPassword}"
                        autocomplete="new-password"
                        th:classappend="${#fields.hasErrors('confirmPassword')} ? ' is-invalid'">
                 <div class="invalid-feedback" th:errors="*{confirmPassword}"></div>
             </div>
 
-            <button class="btn btn-primary w-100" type="submit">Kayıt ol</button>
+            <button class="btn btn-primary w-100" type="submit">Kayıt Ol</button>
         </form>
 
         <div class="auth-switch">
             Zaten hesabın var mı?
-            <a th:href="@{/login}">Giriş yap</a>
+            <a th:href="@{/login}">Giriş Yap</a>
         </div>
     </section>
 </main>

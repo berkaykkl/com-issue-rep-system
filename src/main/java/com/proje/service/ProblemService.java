@@ -31,7 +31,7 @@ public class ProblemService {
     @Transactional(readOnly = true)
     public Problem findById(Long id) {
         return problemRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Bildirim bulunamadi: " + id));
+                .orElseThrow(() -> new IllegalArgumentException("Bildirim bulunamadı: " + id));
     }
 
     @Transactional(readOnly = true)
