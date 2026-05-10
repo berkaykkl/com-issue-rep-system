@@ -81,15 +81,16 @@ public class ProblemService {
 
     public Problem changeStatus(Long id, ProblemStatus newStatus) {
         Problem problem = findById(id);
-        ProblemStatus previousStatus = problem.getStatus();
         problem.setStatus(newStatus);
 
-        if (!problem.isScoreAwarded()
-                && !ProblemStatus.APPROVED.equals(previousStatus)
-                && ProblemStatus.APPROVED.equals(newStatus)) {
-            User owner = problem.getOwner();
+        User owner = problem.getOwner();
+        if (ProblemStatus.APPROVED.equals(newStatus) && !problem.isScoreAwarded()) {
             owner.addScore(APPROVAL_SCORE);
             problem.setScoreAwarded(true);
+            userRepository.save(owner);
+        } else if (!ProblemStatus.APPROVED.equals(newStatus) && problem.isScoreAwarded()) {
+            owner.addScore(-APPROVAL_SCORE);
+            problem.setScoreAwarded(false);
             userRepository.save(owner);
         }
 

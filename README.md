@@ -14,7 +14,7 @@ A layered Spring Boot web application for reporting and managing community issue
 - Dynamic search by issue title or category
 - Thymeleaf form validation with user-friendly error messages
 - Ranking page for users with the highest scores
-- H2 file-based database for persistent local development
+- PostgreSQL database for persistent local development
 
 ## Tech Stack
 
@@ -24,7 +24,7 @@ A layered Spring Boot web application for reporting and managing community issue
 - Spring Data JPA
 - Thymeleaf
 - Bootstrap 5
-- H2 Database
+- PostgreSQL
 - Maven
 
 ## Demo Accounts
@@ -62,23 +62,29 @@ http://localhost:8080
 
 ## Database
 
-The project uses a file-based H2 database by default, so local data remains available after restarting the application.
+The project uses PostgreSQL by default. Create the database before running the application:
 
-H2 console:
-
-```text
-http://localhost:8080/h2-console
+```sql
+CREATE DATABASE community_issue_db;
 ```
 
-Connection settings:
+Default connection settings:
 
 ```text
-JDBC URL: jdbc:h2:file:./data/toplumsaldb
-Username: sa
-Password:
+JDBC URL: jdbc:postgresql://localhost:5432/community_issue_db
+Username: postgres
+Password: postgres
 ```
 
-Tables are generated automatically from the JPA entities when the application starts. Local database files are written under the `data/` directory and are ignored by Git.
+You can override these values with environment variables:
+
+```text
+DB_URL
+DB_USERNAME
+DB_PASSWORD
+```
+
+Tables are generated automatically from the JPA entities when the application starts.
 
 ## Notes
 
