@@ -40,6 +40,7 @@ public class ProblemController {
                        Authentication authentication,
                        Model model) {
         User currentUser = userService.findByUsername(authentication.getName());
+        requireRegularUser(currentUser);
         model.addAttribute("currentUser", currentUser);
         model.addAttribute("problems", problemService.findForUser(currentUser, keyword));
         model.addAttribute("q", keyword);
@@ -47,7 +48,8 @@ public class ProblemController {
     }
 
     @GetMapping("/add")
-    public String addForm(Model model) {
+    public String addForm(Authentication authentication, Model model) {
+        requireRegularUser(userService.findByUsername(authentication.getName()));
         model.addAttribute("problemForm", new ProblemForm());
         model.addAttribute("mode", "create");
         return "problem/form";
@@ -66,6 +68,7 @@ public class ProblemController {
         }
 
         User currentUser = userService.findByUsername(authentication.getName());
+        requireRegularUser(currentUser);
         problemService.create(form, currentUser);
         redirectAttributes.addFlashAttribute("success", "Bildirim oluşturuldu ve onay bekliyor.");
         return "redirect:/problem";
@@ -136,6 +139,12 @@ public class ProblemController {
     private void requireOwnerOrAdmin(User currentUser, Problem problem) {
         if (!problemService.canManage(currentUser, problem)) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Bu bildirim için yetkiniz yok.");
+        }
+    }
+
+    private void requireRegularUser(User currentUser) {
+        if (currentUser == null || currentUser.isAdmin()) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Bu alan sadece kullanıcılar içindir.");
         }
     }
 }

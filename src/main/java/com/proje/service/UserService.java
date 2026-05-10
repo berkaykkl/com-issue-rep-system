@@ -28,7 +28,7 @@ public class UserService {
     }
 
     public List<User> ranking() {
-        return userRepository.findTop10ByOrderByScoreDescUsernameAsc();
+        return userRepository.findTop10ByRoleOrderByScoreDescUsernameAsc(Role.USER);
     }
 
     public boolean usernameExists(String username) {

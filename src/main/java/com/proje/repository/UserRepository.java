@@ -1,5 +1,6 @@
 package com.proje.repository;
 
+import com.proje.entity.Role;
 import com.proje.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -12,5 +13,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     boolean existsByUsername(String username);
 
-    List<User> findTop10ByOrderByScoreDescUsernameAsc();
+    List<User> findTop10ByRoleOrderByScoreDescUsernameAsc(Role role);
 }
