@@ -41,21 +41,59 @@
     </div>
 
     <div class="problem-grid" th:if="${!#lists.isEmpty(approvedProblems)}">
-        <article class="problem-card" th:each="problem : ${approvedProblems}">
-            <img th:if="${problem.hasImage()}" th:src="${problem.imageAsBase64}" alt="Bildirim görseli">
-            <div class="problem-card-body">
-                <div class="d-flex justify-content-between align-items-start gap-2">
-                    <span class="badge bg-success">Onaylandı</span>
-                    <span class="text-muted small" th:text="${problem.formattedCreatedAt}">01.01.2026</span>
+        <th:block th:each="problem : ${approvedProblems}">
+            <article class="problem-card">
+                <img th:if="${problem.hasImage()}" th:src="${problem.imageAsBase64}" alt="Bildirim görseli">
+                <div class="problem-card-body">
+                    <div class="d-flex justify-content-between align-items-start gap-2">
+                        <span class="badge bg-success">Onaylandı</span>
+                        <span class="text-muted small" th:text="${problem.formattedCreatedAt}">01.01.2026</span>
+                    </div>
+                    <h3 class="h5 mt-3" th:text="${problem.title}">Başlık</h3>
+                    <div class="feed-meta">
+                        <span th:text="${problem.category}">Kategori</span>
+                        <span class="feed-user" th:text="${problem.owner.username}">kullanıcı</span>
+                    </div>
+                    <p class="problem-description" th:text="${problem.description}">Açıklama</p>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <button class="btn btn-view btn-sm" type="button"
+                                data-bs-toggle="modal"
+                                th:attr="data-bs-target='#approvedProblemModal-' + ${problem.id}">
+                            Görüntüle
+                        </button>
+                    </div>
                 </div>
-                <h3 class="h5 mt-3" th:text="${problem.title}">Başlık</h3>
-                <div class="feed-meta">
-                    <span th:text="${problem.category}">Kategori</span>
-                    <span class="feed-user" th:text="${problem.owner.username}">kullanıcı</span>
+            </article>
+
+            <div class="modal fade" th:id="'approvedProblemModal-' + ${problem.id}" tabindex="-1"
+                 th:attr="aria-labelledby='approvedProblemModalLabel-' + ${problem.id}" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content problem-modal">
+                        <div class="modal-header">
+                            <div>
+                                <span class="badge bg-success">Onaylandı</span>
+                                <h2 class="modal-title h5 mt-2" th:id="'approvedProblemModalLabel-' + ${problem.id}"
+                                    th:text="${problem.title}">Bildirim</h2>
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                        </div>
+                        <div class="modal-body">
+                            <img class="problem-modal-image" th:if="${problem.hasImage()}"
+                                 th:src="${problem.imageAsBase64}" alt="Bildirim görseli">
+                            <div class="problem-modal-meta">
+                                <span th:text="${problem.category}">Kategori</span>
+                                <span class="feed-user" th:text="${problem.owner.username}">kullanıcı</span>
+                                <span th:text="${problem.formattedCreatedAt}">01.01.2026</span>
+                            </div>
+                            <p class="problem-modal-description" th:text="${problem.description}">Açıklama</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Kapat</button>
+                        </div>
+                    </div>
                 </div>
-                <p class="problem-description" th:text="${problem.description}">Açıklama</p>
             </div>
-        </article>
+        </th:block>
     </div>
 </main>
 
