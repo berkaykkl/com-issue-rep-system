@@ -37,7 +37,8 @@ public class HomeController {
     public String dashboard(Authentication authentication, Model model) {
         User currentUser = userService.findByUsername(authentication.getName());
         model.addAttribute("currentUser", currentUser);
-        model.addAttribute("problems", problemService.findForUser(currentUser, null));
+        model.addAttribute("userProblemCount", problemService.findForUser(currentUser, null).size());
+        model.addAttribute("approvedProblems", problemService.findApprovedFeed());
         return "dashboard";
     }
 }

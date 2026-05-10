@@ -13,6 +13,8 @@ public interface ProblemRepository extends JpaRepository<Problem, Long> {
 
     List<Problem> findByOwnerOrderByCreatedAtDesc(User owner);
 
+    List<Problem> findByStatusOrderByCreatedAtDesc(ProblemStatus status);
+
     List<Problem> findAllByOrderByCreatedAtDesc();
 
     @Query("select p from Problem p where " +

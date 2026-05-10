@@ -2,16 +2,19 @@
 <html lang="tr"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="fragments :: head('Panel')"></head>
+<head th:replace="fragments :: head('Ana Sayfa')"></head>
 <body class="d-flex flex-column min-vh-100">
 <div th:replace="fragments :: navbar"></div>
 
 <main class="container py-4 flex-grow-1">
     <div class="page-title">
         <div>
-            <h1 class="h3 mb-0">Kontrol Paneli</h1>
+            <h1 class="h3 mb-0">Ana Sayfa</h1>
         </div>
-        <a class="btn btn-primary" th:href="@{/problem/add}">Yeni Bildirim</a>
+        <div class="d-flex gap-2 flex-wrap">
+            <a class="btn btn-outline-primary" th:href="@{/problem}">Bildirimlerim</a>
+            <a class="btn btn-primary" th:href="@{/problem/add}">Yeni Bildirim</a>
+        </div>
     </div>
 
     <div class="stats-grid my-4">
@@ -20,35 +23,37 @@
             <strong th:text="${currentUser.score}">0</strong>
         </div>
         <div class="stat-box">
-            <span>Rol</span>
-            <strong th:text="${currentUser.role}">USER</strong>
+            <span>Bildirimlerim</span>
+            <strong th:text="${userProblemCount}">0</strong>
         </div>
         <div class="stat-box">
-            <span>Bildirim</span>
-            <strong th:text="${#lists.size(problems)}">0</strong>
+            <span>Onaylanan</span>
+            <strong th:text="${#lists.size(approvedProblems)}">0</strong>
         </div>
     </div>
 
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2 class="h5 mb-0">Son Bildirimlerim</h2>
-        <a class="btn btn-outline-primary btn-sm" th:href="@{/problem}">Tümünü Gör</a>
+        <h2 class="h5 mb-0">Onaylanan Sorunlar</h2>
     </div>
 
-    <div class="empty-state" th:if="${#lists.isEmpty(problems)}">
-        Henüz bildirim oluşturmadın.
+    <div class="empty-state" th:if="${#lists.isEmpty(approvedProblems)}">
+        Henüz onaylanan bildirim yok.
     </div>
 
-    <div class="problem-grid" th:if="${!#lists.isEmpty(problems)}">
-        <article class="problem-card" th:each="problem, iter : ${problems}" th:if="${iter.index < 3}">
+    <div class="problem-grid" th:if="${!#lists.isEmpty(approvedProblems)}">
+        <article class="problem-card" th:each="problem : ${approvedProblems}">
             <img th:if="${problem.hasImage()}" th:src="${problem.imageAsBase64}" alt="Bildirim görseli">
             <div class="problem-card-body">
-                <span class="badge"
-                      th:text="${problem.status.label}"
-                      th:classappend="${problem.status.name() == 'APPROVED'} ? ' bg-success' : (${problem.status.name() == 'REJECTED'} ? ' bg-danger' : ' bg-warning text-dark')">
-                    Beklemede
-                </span>
-                <h3 class="h6 mt-3 mb-1" th:text="${problem.title}">Başlık</h3>
-                <p class="text-muted small mb-0" th:text="${problem.category}">Kategori</p>
+                <div class="d-flex justify-content-between align-items-start gap-2">
+                    <span class="badge bg-success">Onaylandı</span>
+                    <span class="text-muted small" th:text="${problem.formattedCreatedAt}">01.01.2026</span>
+                </div>
+                <h3 class="h5 mt-3" th:text="${problem.title}">Başlık</h3>
+                <div class="feed-meta">
+                    <span th:text="${problem.category}">Kategori</span>
+                    <span class="feed-user" th:text="${problem.owner.username}">kullanıcı</span>
+                </div>
+                <p class="problem-description" th:text="${problem.description}">Açıklama</p>
             </div>
         </article>
     </div>

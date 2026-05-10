@@ -43,6 +43,11 @@ public class ProblemService {
     }
 
     @Transactional(readOnly = true)
+    public List<Problem> findApprovedFeed() {
+        return problemRepository.findByStatusOrderByCreatedAtDesc(ProblemStatus.APPROVED);
+    }
+
+    @Transactional(readOnly = true)
     public List<Problem> findAll(String keyword) {
         if (StringUtils.hasText(keyword)) {
             return problemRepository.searchAll(keyword.trim());
